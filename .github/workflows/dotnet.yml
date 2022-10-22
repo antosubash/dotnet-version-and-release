@@ -24,3 +24,29 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Install Versionize
+      run: dotnet tool install --global Versionize
+    - name: Setup git
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+    - name: Versionize Release
+      id: versionize
+      run: versionize --changelog-all --exit-insignificant-commits
+      continue-on-error: true
+    - name: No release required
+      if: steps.versionize.outcome != 'success'
+      run: echo "Skipping publishing. No release required."
+    - name: Push changes to GitHub
+      if: steps.versionize.outcome == 'success'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        tags: true
+    - name: Create GitHub release
+      uses: Roang-zero1/github-create-release-action@v2
+      with:
+        version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
