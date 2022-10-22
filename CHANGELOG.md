@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.0.5"></a>
+## [1.0.5](https://www.github.com/antosubash/dotnet-version-and-release/releases/tag/v1.0.5) (2022-10-22)
+
+### Bug Fixes
+
+* added personal email on git config ([e274294](https://www.github.com/antosubash/dotnet-version-and-release/commit/e274294227b7ddd4ce3675b26f0827cb4f7f6663))
+* changed release action ([52299bf](https://www.github.com/antosubash/dotnet-version-and-release/commit/52299bf3a807dc70d36e8a1a156e9b040ef192d1))
+* fixed the error on release ([bb63441](https://www.github.com/antosubash/dotnet-version-and-release/commit/bb63441145accf374718a9a444bf5b462bb13cda))
+* replaced release ([18699f9](https://www.github.com/antosubash/dotnet-version-and-release/commit/18699f9a28cb59d7ca052525b690a6471928d0cf))
+
+### Other
+
+* Merge branch 'main' of https://github.com/antosubash/dotnet-version-and-release ([4aa11c2](https://www.github.com/antosubash/dotnet-version-and-release/commit/4aa11c220f7a9ef95a66200969439463b63bd340))
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://www.github.com/antosubash/dotnet-version-and-release/releases/tag/v1.0.4) (2022-10-22)
 
