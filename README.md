@@ -109,14 +109,6 @@ Now we have our hooks ready. We need to update the task runner to run the hooks.
 }
 ```
 
-
-
-
-
-
-### Add a commit-msg hook
-
-
 ## Adding Versionize
 
 We will use Versionize to version the application. Versionize will use the commit message to determine the version of the application. It will also generate a changelog based on the commit messages and tag the commit with the version.
@@ -132,3 +124,11 @@ Now we can install the versionize tool.
 ```bash
 dotnet tool install --global versionize
 ```
+
+When you want to version the application, run the following command.
+
+```bash
+versionize
+```
+
+This will version the application and generate a changelog. You can find the changelog in the `CHANGELOG.md` file. You can also find the version in the `version.json` file.
