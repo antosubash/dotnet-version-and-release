@@ -53,5 +53,6 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ steps.versionize.outputs.version }}
         body: ${{ steps.versionize.outputs.changelog }}
+        tag: ${{ steps.versionize.outputs.version }}
         draft: false
         prerelease: false
