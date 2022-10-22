@@ -48,9 +48,10 @@ jobs:
         tags: true
     - name: Create GitHub release
       if: steps.versionize.outcome == 'success'
-      uses: Roang-zero1/github-create-release-action@v2
+    - uses: ncipollo/release-action@v1
       with:
-        version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ steps.versionize.outputs.version }}
+        body: ${{ steps.versionize.outputs.changelog }}
+        draft: false
+        prerelease: false
