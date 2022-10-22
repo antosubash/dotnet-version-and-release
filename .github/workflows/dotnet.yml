@@ -46,3 +46,11 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
+    - name: Create GitHub release
+      if: steps.versionize.outcome == 'success'
+      uses: Roang-zero1/github-create-release-action@v2
+      with:
+        version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
