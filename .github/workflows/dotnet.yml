@@ -48,7 +48,7 @@ jobs:
         tags: true
     - name: Create GitHub release
       if: steps.versionize.outcome == 'success'
-    - uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ steps.versionize.outputs.version }}
