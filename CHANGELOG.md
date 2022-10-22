@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.0.4"></a>
+## [1.0.4](https://www.github.com/antosubash/dotnet-version-and-release/releases/tag/v1.0.4) (2022-10-22)
+
+### Bug Fixes
+
+* removed branch from the release ([e30ea04](https://www.github.com/antosubash/dotnet-version-and-release/commit/e30ea04029a39da2c87c9b35c68e5d6b542918ba))
+
+### Other
+
+* Merge branch 'main' of https://github.com/antosubash/dotnet-version-and-release ([b5fd490](https://www.github.com/antosubash/dotnet-version-and-release/commit/b5fd490a303c8d698fb0adba2b86b3aca4f606b0))
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://www.github.com/antosubash/dotnet-version-and-release/releases/tag/v1.0.3) (2022-10-22)
 
