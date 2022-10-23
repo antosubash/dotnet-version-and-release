@@ -46,5 +46,10 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
+
+  Release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     - name: Create GitHub release
       uses: antosubash/dotnet-version-and-release/.github/workflows/release.yml@main
