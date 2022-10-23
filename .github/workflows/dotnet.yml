@@ -47,22 +47,26 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: "Create release"
-      if: steps.versionize.outcome == 'success'
-      uses: "actions/github-script@v5"
+    - name: View context attributes
+      uses: actions/github-script@v6
       with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-        script: |
-          try {
-            await github.rest.repos.createRelease({
-              draft: false,
-              generate_release_notes: true,
-              name: ${{ github.event.inputs.main_version }},
-              owner: context.repo.owner,
-              prerelease: false,
-              repo: context.repo.repo,
-              tag_name: ${{ github.event.inputs.main_version }},
-            });
-          } catch (error) {
-            core.setFailed(error.message);
-          }
+        script: console.log(context)
+    # - name: "Create release"
+    #   if: steps.versionize.outcome == 'success'
+    #   uses: "actions/github-script@v5"
+    #   with:
+    #     github-token: "${{ secrets.GITHUB_TOKEN }}"
+    #     script: |
+    #       try {
+    #         await github.rest.repos.createRelease({
+    #           draft: false,
+    #           generate_release_notes: true,
+    #           name: ${{ github.event.inputs.main_version }},
+    #           owner: context.repo.owner,
+    #           prerelease: false,
+    #           repo: context.repo.repo,
+    #           tag_name: ${{ github.event.inputs.main_version }},
+    #         });
+    #       } catch (error) {
+    #         core.setFailed(error.message);
+    #       }
