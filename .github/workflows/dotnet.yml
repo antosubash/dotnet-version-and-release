@@ -44,18 +44,6 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Log current_tag
-      if: steps.versionize.outcome == 'success'
-      uses: actions/github-script@v6
-      with:
-        script: |
-            const tags_url = context.payload.repository.tags_url
-            const result = await github.request(tags_url)
-            const current_tag = result.data[0].name
-            console.log(current_tag)
     - name: "Create release"
       if: steps.versionize.outcome == 'success'
       uses: "actions/github-script@v5"
@@ -74,6 +62,10 @@ jobs:
               prerelease: false,
               repo: context.repo.repo,
               tag_name: current_tag,
+              changelog : {
+                title: "Changelog",
+                body: "This is the changelog"
+              }
             });
           } catch (error) {
             core.setFailed(error.message);
