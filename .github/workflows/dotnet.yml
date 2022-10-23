@@ -47,9 +47,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: "Determine tag"
-      if: steps.versionize.outcome == 'success'
-      run: "echo \"RELEASE_TAG=${git describe --tags}\" >> $GITHUB_ENV"
     - name: "Create release"
       if: steps.versionize.outcome == 'success'
       uses: "actions/github-script@v5"
@@ -60,11 +57,11 @@ jobs:
             await github.rest.repos.createRelease({
               draft: false,
               generate_release_notes: true,
-              name: process.env.RELEASE_TAG,
+              name: ${{ github.event.inputs.main_version }},
               owner: context.repo.owner,
               prerelease: false,
               repo: context.repo.repo,
-              tag_name: process.env.RELEASE_TAG,
+              tag_name: ${{ github.event.inputs.main_version }},
             });
           } catch (error) {
             core.setFailed(error.message);
