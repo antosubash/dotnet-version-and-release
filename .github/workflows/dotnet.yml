@@ -46,13 +46,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Create GitHub release
-      if: steps.versionize.outcome == 'success'
-      uses: ncipollo/release-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        draft: false
-        prerelease: false
+      uses: antosubash/dotnet-version-and-release/.github/workflows/release.yml@main
