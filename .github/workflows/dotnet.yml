@@ -36,7 +36,7 @@ jobs:
       continue-on-error: true
     - name: No release required
       if: steps.versionize.outcome != 'success'
-      run: echo "Skipping publishing. No release required."
+      run: echo "Skipping Release. No release required."
     - name: Push changes to GitHub
       if: steps.versionize.outcome == 'success'
       uses: ad-m/github-push-action@master

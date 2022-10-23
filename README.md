@@ -83,7 +83,7 @@ return 1;
 
 ## Update the task runner
 
-Now we have our hooks ready. We need to update the task runner to run the hooks. Open the `task-runner.json` file and update the tasks. 
+Now we have our hooks ready. We need to update the task runner to run the hooks. Open the `task-runner.json` file and update the tasks.
 
 ```json
 {
@@ -122,7 +122,7 @@ To get started add version to you csproj file.
 Now we can install the versionize tool.
 
 ```bash
-dotnet tool install --global versionize
+dotnet tool install --global Versionize
 ```
 
 When you want to version the application, run the following command.
@@ -131,4 +131,86 @@ When you want to version the application, run the following command.
 versionize
 ```
 
-This will version the application and generate a changelog. You can find the changelog in the `CHANGELOG.md` file. You can also find the version in the `version.json` file.
+This will version the application and generate a changelog. You can find the changelog in the `CHANGELOG.md` file.
+
+Now lets automate this process using github actions.
+
+## Creating github action
+
+We will create a github action to version and release the application. Create a new file in the `.github/workflows` folder and name it `version-and-release.yml`. In the `version-and-release.yml` file, add the following code.
+
+```yaml
+name: Version and Release
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Install Versionize
+      run: dotnet tool install --global Versionize
+    - name: Setup git
+      run: |
+        git config --local user.email "antosubash@live.com"
+        git config --local user.name "Anto Subash"
+    - name: Versionize Release
+      id: versionize
+      run: versionize --changelog-all --exit-insignificant-commits
+      continue-on-error: true
+    - name: No release required
+      if: steps.versionize.outcome != 'success'
+      run: echo "Skipping Release. No release required."
+    - name: Push changes to GitHub
+      if: steps.versionize.outcome == 'success'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        tags: true
+    - name: "Create release"
+      if: steps.versionize.outcome == 'success'
+      uses: "actions/github-script@v5"
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
+        script: |
+          try {
+            const tags_url = context.payload.repository.tags_url + "?per_page=1"
+            const result = await github.request(tags_url)
+            const current_tag = result.data[0].name
+            await github.rest.repos.createRelease({
+              draft: false,
+              generate_release_notes: true,
+              name: current_tag,
+              owner: context.repo.owner,
+              prerelease: false,
+              repo: context.repo.repo,
+              tag_name: current_tag,
+              changelog : {
+                title: "Changelog",
+                body: "This is the changelog"
+              }
+            });
+          } catch (error) {
+            core.setFailed(error.message);
+          }
+```
+
+## Conclusion
+
+In this article, we have seen how to version and release a dotnet application using versionize and github actions. You can find the source code in the [github repository](https://github.com/antosubash/dotnet-version-and-release) for this article. If you have any questions or suggestions, please leave a comment below. Thanks for reading. Happy coding! 🚀 🚀 🚀
