@@ -51,7 +51,7 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-            const tags_url = context.repository.tags_url
+            const tags_url = context.payload.repository.tags_url
             const result = await github.request(tags_url)
             const current_tag = result.data[0].name
             console.log(current_tag)
