@@ -63,7 +63,7 @@ jobs:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
         script: |
           try {
-            const tags_url = context.payload.repository.tags_url
+            const tags_url = context.payload.repository.tags_url + "?per_page=1"
             const result = await github.request(tags_url)
             const current_tag = result.data[0].name
             await github.rest.repos.createRelease({
