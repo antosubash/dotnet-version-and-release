@@ -44,9 +44,9 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
-    - name: Refresh git repo to get new tags
-      if: steps.versionize.outcome == 'success'
-      run: git fetch --tags
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: "Determine tag"
       if: steps.versionize.outcome == 'success'
       run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
