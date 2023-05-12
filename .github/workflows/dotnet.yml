@@ -34,8 +34,6 @@ jobs:
       id: versionize
       run: versionize --changelog-all --exit-insignificant-commits
       continue-on-error: true
-    - name: Versionize Dump
-      run: echo "${{ toJSON(github) }}"
     - name: No release required
       if: steps.versionize.outcome != 'success'
       run: echo "Skipping Release. No release required."
