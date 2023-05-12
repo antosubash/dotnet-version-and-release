@@ -72,3 +72,9 @@ jobs:
           } catch (error) {
             core.setFailed(error.message);
           }
+    - name: Get .NET SDK project versions
+      uses: kzrnm/get-net-sdk-project-versions-action@v1
+      id: get-version
+      with:
+        proj-path: ./src/BookStore/BookStore.csproj
+    - run: echo "${{ steps.get-version.outputs.version }}"
