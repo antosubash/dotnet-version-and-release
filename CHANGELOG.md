@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.1.2"></a>
+## [1.1.2](https://www.github.com/antosubash/dotnet-version-and-release/releases/tag/v1.1.2) (2023-5-12)
+
+### Bug Fixes
+
+* removed the version dump ([c932385](https://www.github.com/antosubash/dotnet-version-and-release/commit/c932385b04a76a65596e7ad1af3ed47e9e7af8b4))
+* updated the action to display the version ([05906e5](https://www.github.com/antosubash/dotnet-version-and-release/commit/05906e536b38fd54ed620c06b06f9d8a789b8321))
+* updated the dump to github context ([e72a464](https://www.github.com/antosubash/dotnet-version-and-release/commit/e72a4643be393c5b5e0c19d8b02acda29ec3aa93))
+
+### Other
+
+* Merge pull request #6 from antosubash/dev ([5844faa](https://www.github.com/antosubash/dotnet-version-and-release/commit/5844faaeee8d62e0143bc3fa32dddf372a67cc3a))
+* Merge pull request #7 from antosubash/dev ([6b2256d](https://www.github.com/antosubash/dotnet-version-and-release/commit/6b2256dfc620d5e7d3a32e444c731e91f710394f))
+* Merge pull request #8 from antosubash/dev ([3dce9c3](https://www.github.com/antosubash/dotnet-version-and-release/commit/3dce9c3cf7d70e5ea561ba269736cf1820a9b61a))
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://www.github.com/antosubash/dotnet-version-and-release/releases/tag/v1.1.1) (2023-5-12)
 
